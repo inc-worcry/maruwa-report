@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>丸和運輸機関 採用進捗レポート 2026年7月度</title>
+  <title>丸和運輸機関 採用進捗レポート 2026年</title>
   <style>
     :root {
       --orange:       #F7941D;
@@ -40,7 +40,6 @@
       align-items: center;
       text-align: center;
       padding: 60px 40px;
-      page-break-after: always;
     }
     .cover-bar { width: 72px; height: 5px; background: var(--orange); border-radius: 3px; margin-bottom: 40px; }
     .cover-eyebrow { font-size: 12px; letter-spacing: 4px; color: rgba(255,255,255,0.55); margin-bottom: 18px; text-transform: uppercase; }
@@ -49,6 +48,42 @@
     .cover-period { font-size: 20px; font-weight: 700; color: var(--orange); margin-bottom: 48px; }
     .cover-rule { width: 56px; height: 1px; background: rgba(255,255,255,0.18); margin: 0 auto 36px; }
     .cover-meta { font-size: 12px; color: rgba(255,255,255,0.45); }
+
+    /* ───── Tab Bar ───── */
+    .tab-bar-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 2px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .tab-bar-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 28px;
+      display: flex;
+      gap: 0;
+    }
+    .tab-btn {
+      padding: 14px 28px;
+      border: none;
+      background: transparent;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active { color: var(--orange); border-bottom-color: var(--orange); }
+
+    /* ───── Tab Content ───── */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
     /* ───── Layout ───── */
     .report { max-width: 980px; margin: 0 auto; padding: 52px 28px 80px; }
@@ -103,24 +138,6 @@
     .kpi-val { font-size: 28px; font-weight: 800; color: var(--text); }
     .kpi-rate { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
 
-    /* ───── Info / Warn Boxes ───── */
-    .info-box {
-      background: var(--blue-light); border-left: 4px solid var(--blue);
-      border-radius: 4px; padding: 12px 16px; margin: 14px 0; font-size: 13px;
-    }
-
-    /* ───── Action List ───── */
-    .action-list { padding-left: 0; list-style: none; margin-top: 8px; }
-    .action-list li {
-      padding: 8px 0 8px 24px; position: relative;
-      border-bottom: 1px dashed var(--border); font-size: 13px;
-    }
-    .action-list li:last-child { border-bottom: none; }
-    .action-list li::before {
-      content: '→'; position: absolute; left: 0;
-      color: var(--orange); font-weight: 700;
-    }
-
     /* ───── Trend Bar ───── */
     .bar-wrap { display: flex; align-items: center; gap: 8px; }
     .bar { height: 14px; background: var(--blue); border-radius: 3px; display: inline-block; }
@@ -133,10 +150,9 @@
     }
     .closing p { color: rgba(255,255,255,0.65); font-size: 13px; margin-top: 8px; }
 
-    /* ───── Page Break ───── */
     @media print {
-      .cover { page-break-after: always; }
-      .section { page-break-inside: avoid; }
+      .tab-bar-wrapper { display: none; }
+      .tab-content { display: block; }
     }
   </style>
 </head>
@@ -148,44 +164,44 @@
   <div class="cover-eyebrow">Recruitment Progress Report</div>
   <div class="cover-company">丸和運輸機関</div>
   <div class="cover-subtitle">新卒採用 進捗レポート</div>
-  <div class="cover-period">2026年 7月度</div>
+  <div class="cover-period">2026年 27卒</div>
   <div class="cover-rule"></div>
   <div class="cover-meta">
     作成：株式会社WorCry&ensp;|&ensp;担当：鈴木 脩平<br>
-    データ基準日：2026年7月16日（木）
+    最新データ基準日：2026年7月16日（木）
   </div>
 </div>
 
-<!-- ████ MAIN ████ -->
+<!-- ████ TAB BAR ████ -->
+<div class="tab-bar-wrapper">
+  <div class="tab-bar-inner">
+    <button class="tab-btn active" data-tab="jul" onclick="switchTab('jul')">📊 7月度（7/16現在）</button>
+    <button class="tab-btn" data-tab="jun" onclick="switchTab('jun')">📋 6月度（6月末）</button>
+  </div>
+</div>
+
+<!-- ████ 7月度 ████ -->
+<div class="tab-content active" id="tab-jul">
 <div class="report">
 
   <div class="update-row">📅 データ更新日：2026年7月16日（木）</div>
 
-  <!-- ════ Section 1 ════ -->
+  <!-- Section 1 -->
   <div class="section">
     <div class="section-title">1）選考進捗サマリー</div>
 
-    <!-- 1-1 27卒 累計 -->
     <div class="sub-title">1-1）27卒 選考進捗サマリー（累計）</div>
     <table>
       <thead>
         <tr>
           <th style="width:72px;"></th>
-          <th>応募</th>
-          <th>カジュアル面接</th>
-          <th>最終選考</th>
-          <th>内定</th>
-          <th>承諾</th>
+          <th>応募</th><th>カジュアル面接</th><th>最終選考</th><th>内定</th><th>承諾</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td class="td-row-label">実績</td>
-          <td>170</td>
-          <td>35</td>
-          <td>14</td>
-          <td>7</td>
-          <td class="td-accent">1</td>
+          <td>170</td><td>35</td><td>14</td><td>7</td><td class="td-accent">1</td>
         </tr>
         <tr>
           <td class="td-row-label" style="font-size:12px;">ステップ率</td>
@@ -199,22 +215,16 @@
     </table>
     <p class="caption">※ 応募＝スカウト承諾（ABABA・キャリアチケット）＋自己応募（OpenWork）の合計　／　ステップ率＝前ステップからの転換率</p>
 
-    <!-- 1-2 月次KPI目標 -->
     <div class="sub-title" style="margin-top:28px;">1-2）月次 KPI 目標</div>
     <table>
       <thead>
         <tr>
-          <th style="width:180px;">KPI項目</th>
-          <th>月次目標（件数）</th>
-          <th>目標転換率</th>
-          <th>ステータス</th>
+          <th style="width:180px;">KPI項目</th><th>月次目標（件数）</th><th>目標転換率</th><th>ステータス</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="td-media-label">スカウト承諾</td>
-          <td>10件</td>
-          <td>0.50%</td>
+          <td class="td-media-label">スカウト承諾</td><td>10件</td><td>0.50%</td>
           <td style="color:var(--text-muted); font-size:12px;">承諾率 目標値</td>
         </tr>
         <tr>
@@ -224,77 +234,54 @@
           <td style="background:var(--orange-light)!important; font-size:12px; color:var(--orange-dark);">⚠️ 現状ボトルネック</td>
         </tr>
         <tr>
-          <td class="td-media-label">最終面接</td>
-          <td>3件</td>
-          <td>30.00%</td>
+          <td class="td-media-label">最終面接</td><td>3件</td><td>30.00%</td>
           <td style="color:var(--text-muted); font-size:12px;">転換率 目標値</td>
         </tr>
         <tr>
-          <td class="td-media-label-even">内定</td>
-          <td>2件</td>
-          <td>33.33%</td>
+          <td class="td-media-label-even">内定</td><td>2件</td><td>33.33%</td>
           <td style="color:var(--text-muted); font-size:12px;">転換率 目標値</td>
         </tr>
         <tr>
-          <td class="td-media-label">承諾</td>
-          <td>1件</td>
-          <td>ー</td>
+          <td class="td-media-label">承諾</td><td>1件</td><td>ー</td>
           <td style="color:var(--text-muted); font-size:12px;">最終目標</td>
         </tr>
       </tbody>
     </table>
     <p class="caption">※ 月次目標は各ステップの目標件数および前ステップからの転換率目標を示す</p>
 
-    <!-- 7月度 単月実績 -->
     <div class="sub-title" style="margin-top:28px;">7月度 単月実績（27卒・7/1〜7/16）</div>
     <table>
       <thead>
         <tr>
-          <th style="width:160px;">媒体</th>
-          <th>承諾（応募）</th>
-          <th>承諾率</th>
-          <th>C面接</th>
-          <th>内定</th>
+          <th style="width:160px;">媒体</th><th>承諾（応募）</th><th>承諾率</th><th>C面接</th><th>内定</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td class="td-row-label">ABABA</td>
-          <td>4</td><td>1.1%</td>
-          <td class="td-pending">ー</td><td>0</td>
+          <td>4</td><td>1.1%</td><td class="td-pending">ー</td><td>0</td>
         </tr>
         <tr>
           <td class="td-row-label">キャリアチケット</td>
-          <td>4</td><td>2.0%</td>
-          <td class="td-pending">ー</td>
-          <td>ー</td>
+          <td>4</td><td>2.0%</td><td class="td-pending">ー</td><td>ー</td>
         </tr>
         <tr>
           <td class="td-row-label">OpenWork（27卒）</td>
-          <td>3</td><td>ー</td>
-          <td class="td-pending">ー</td>
-          <td>ー</td>
+          <td>3</td><td>ー</td><td class="td-pending">ー</td><td>ー</td>
         </tr>
       </tbody>
     </table>
-    <p class="caption">※ C面接数は選考ステップと照合して集計 ／ キャリアチケット承諾数はプラットフォーム承諾日付より集計 ／ OpenWorkは自己応募中心のため承諾率ー</p>
+    <p class="caption">※ C面接数は選考ステップと照合して集計 ／ CT承諾数はプラットフォーム承諾日付より集計 ／ OWは自己応募中心のため承諾率ー</p>
   </div>
 
-  <!-- ════ Section 2 ════ -->
+  <!-- Section 2 -->
   <div class="section">
     <div class="section-title">2）媒体別 選考状況</div>
-
-    <!-- 27卒 累計 媒体別 -->
     <div class="sub-title">27卒 媒体別選考状況（累計）</div>
     <table>
       <thead>
         <tr>
-          <th style="width:175px;">媒体</th>
-          <th>応募</th>
-          <th>カジュアル面接</th>
-          <th>最終選考</th>
-          <th>内定</th>
-          <th>承諾</th>
+          <th style="width:175px;">媒体</th><th>応募</th><th>カジュアル面接</th><th>最終選考</th><th>内定</th><th>承諾</th>
         </tr>
       </thead>
       <tbody>
@@ -312,400 +299,403 @@
         </tr>
         <tr>
           <td class="td-total">合計</td>
-          <td class="td-total">170</td>
-          <td class="td-total">35</td>
-          <td class="td-total">14</td>
-          <td class="td-total">7</td>
-          <td class="td-total td-accent">1</td>
+          <td class="td-total">170</td><td class="td-total">35</td><td class="td-total">14</td>
+          <td class="td-total">7</td><td class="td-total td-accent">1</td>
         </tr>
       </tbody>
     </table>
     <p class="caption">
       ※ 応募＝スカウト承諾（ABABA・CT）＋自己応募（OW）。CT・OWはスプレッドシート実績値を使用<br>
-      ※ カジュアル面接＝各媒体の初回面接 ／ 最終選考＝最終面接ステップ ／ 内定3名のうちABABA 1名・OW 1名は辞退
+      ※ カジュアル面接＝各媒体の初回面接 ／ 最終選考＝最終面接ステップ ／ 内定7名のうちABABA 1名・CT 1名・OW 1名は辞退
     </p>
   </div>
 
-  <!-- ════ Section 3 ════ -->
+  <!-- Section 3 -->
   <div class="section">
     <div class="section-title">3）月次推移・選考ステップ率</div>
 
-    <!-- ABABA 月次 -->
     <div class="sub-title">ABABA スカウト月次推移（27卒）</div>
     <table>
       <thead>
         <tr>
-          <th style="width:160px;">月度</th>
-          <th>スカウト送信数</th>
-          <th>承諾数</th>
-          <th>承諾率</th>
-          <th>推移イメージ</th>
+          <th style="width:160px;">月度</th><th>スカウト送信数</th><th>承諾数</th><th>承諾率</th><th>推移イメージ</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="td-row-label">2025年10月</td>
-          <td>16</td><td>0</td><td>0%</td>
-          <td style="text-align:left; padding-left:8px; background:#fff;">
-            <div class="bar-wrap"><span style="color:var(--text-muted); font-size:12px;">ー</span></div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2025年11月</td>
-          <td>28</td><td>0</td><td>0%</td>
-          <td style="text-align:left; padding-left:8px; background:#EEF6FB;">
-            <div class="bar-wrap"><span style="color:var(--text-muted); font-size:12px;">ー</span></div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2026年1月</td>
-          <td>406</td><td>4</td><td>1.0%</td>
-          <td style="text-align:left; padding-left:8px; background:#fff;">
-            <div class="bar-wrap"><span class="bar" style="width:20px;"></span>4件</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2026年2月</td>
-          <td>249</td><td>3</td><td>1.2%</td>
-          <td style="text-align:left; padding-left:8px; background:#EEF6FB;">
-            <div class="bar-wrap"><span class="bar" style="width:15px;"></span>3件</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2026年3月</td>
-          <td>295</td><td>5</td><td>1.7%</td>
-          <td style="text-align:left; padding-left:8px; background:#fff;">
-            <div class="bar-wrap"><span class="bar" style="width:25px;"></span>5件</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2026年4月</td>
-          <td>316</td><td>6</td><td>1.9%</td>
-          <td style="text-align:left; padding-left:8px; background:#EEF6FB;">
-            <div class="bar-wrap"><span class="bar" style="width:30px;"></span>6件</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2026年5月</td>
-          <td>822</td><td>12</td><td>1.5%</td>
-          <td style="text-align:left; padding-left:8px; background:#fff;">
-            <div class="bar-wrap"><span class="bar" style="width:60px;"></span>12件</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2026年6月</td>
-          <td>1,315</td><td>18</td><td>1.4%</td>
-          <td style="text-align:left; padding-left:8px; background:#EEF6FB;">
-            <div class="bar-wrap"><span class="bar" style="width:90px;"></span>18件</div>
-          </td>
-        </tr>
+        <tr><td class="td-row-label">2025年10月</td><td>16</td><td>0</td><td>0%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span style="color:var(--text-muted); font-size:12px;">ー</span></div></td></tr>
+        <tr><td class="td-row-label">2025年11月</td><td>28</td><td>0</td><td>0%</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span style="color:var(--text-muted); font-size:12px;">ー</span></div></td></tr>
+        <tr><td class="td-row-label">2026年1月</td><td>406</td><td>4</td><td>1.0%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:20px;"></span>4件</div></td></tr>
+        <tr><td class="td-row-label">2026年2月</td><td>249</td><td>3</td><td>1.2%</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span class="bar" style="width:15px;"></span>3件</div></td></tr>
+        <tr><td class="td-row-label">2026年3月</td><td>295</td><td>5</td><td>1.7%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:25px;"></span>5件</div></td></tr>
+        <tr><td class="td-row-label">2026年4月</td><td>316</td><td>6</td><td>1.9%</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span class="bar" style="width:30px;"></span>6件</div></td></tr>
+        <tr><td class="td-row-label">2026年5月</td><td>822</td><td>12</td><td>1.5%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:60px;"></span>12件</div></td></tr>
+        <tr><td class="td-row-label">2026年6月</td><td>1,315</td><td>18</td><td>1.4%</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span class="bar" style="width:90px;"></span>18件</div></td></tr>
         <tr>
           <td class="td-row-label td-accent">2026年7月（途中）</td>
-          <td class="td-accent">350</td>
-          <td class="td-accent">4</td>
-          <td class="td-accent">1.1%</td>
-          <td style="text-align:left; padding-left:8px;" class="td-accent">
-            <div class="bar-wrap"><span class="bar highlight" style="width:20px;"></span><strong>4件</strong></div>
-          </td>
+          <td class="td-accent">350</td><td class="td-accent">4</td><td class="td-accent">1.1%</td>
+          <td style="text-align:left; padding-left:8px;" class="td-accent"><div class="bar-wrap"><span class="bar highlight" style="width:20px;"></span><strong>4件</strong></div></td>
         </tr>
       </tbody>
     </table>
     <p class="caption">※ 2025年12月はABABAプラットフォーム上のデータなし（スカウト送信ゼロのため非表示） ／ 累計送信3,954通・承諾53名（承諾率1.3%）</p>
 
-    <!-- キャリアチケット 月次 -->
     <div class="sub-title">キャリアチケット スカウト月次推移（27卒）</div>
     <table>
       <thead>
         <tr>
-          <th style="width:160px;">月度</th>
-          <th>スカウト送信数</th>
-          <th>承諾数</th>
-          <th>承諾率</th>
-          <th>推移イメージ</th>
+          <th style="width:160px;">月度</th><th>スカウト送信数</th><th>承諾数</th><th>承諾率</th><th>推移イメージ</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="td-row-label">2025年10月</td>
-          <td>400</td><td>14</td><td>3.5%</td>
-          <td style="text-align:left; padding-left:8px; background:#fff;">
-            <div class="bar-wrap"><span class="bar" style="width:98px;"></span>14件</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2025年11月</td>
-          <td>400</td><td>4</td><td>1.0%</td>
-          <td style="text-align:left; padding-left:8px; background:#EEF6FB;">
-            <div class="bar-wrap"><span class="bar" style="width:28px;"></span>4件</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2025年12月</td>
-          <td>400</td><td>6</td><td>1.5%</td>
-          <td style="text-align:left; padding-left:8px; background:#fff;">
-            <div class="bar-wrap"><span class="bar" style="width:42px;"></span>6件</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2026年1月</td>
-          <td>400</td><td>8</td><td>2.0%</td>
-          <td style="text-align:left; padding-left:8px; background:#EEF6FB;">
-            <div class="bar-wrap"><span class="bar" style="width:56px;"></span>8件</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2026年2月</td>
-          <td>400</td><td>3</td><td>0.75%</td>
-          <td style="text-align:left; padding-left:8px; background:#fff;">
-            <div class="bar-wrap"><span class="bar" style="width:21px;"></span>3件</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2026年3月</td>
-          <td>400</td><td>13</td><td>3.25%</td>
-          <td style="text-align:left; padding-left:8px; background:#EEF6FB;">
-            <div class="bar-wrap"><span class="bar" style="width:91px;"></span>13件</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2026年4月</td>
-          <td>400</td><td>9</td><td>2.25%</td>
-          <td style="text-align:left; padding-left:8px; background:#fff;">
-            <div class="bar-wrap"><span class="bar" style="width:63px;"></span>9件</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2026年5月</td>
-          <td>400</td><td>10</td><td>2.5%</td>
-          <td style="text-align:left; padding-left:8px; background:#EEF6FB;">
-            <div class="bar-wrap"><span class="bar" style="width:70px;"></span>10件</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2026年6月</td>
-          <td>400</td><td>6</td><td>1.5%</td>
-          <td style="text-align:left; padding-left:8px; background:#fff;">
-            <div class="bar-wrap"><span class="bar" style="width:42px;"></span>6件</div>
-          </td>
-        </tr>
+        <tr><td class="td-row-label">2025年10月</td><td>400</td><td>14</td><td>3.5%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:98px;"></span>14件</div></td></tr>
+        <tr><td class="td-row-label">2025年11月</td><td>400</td><td>4</td><td>1.0%</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span class="bar" style="width:28px;"></span>4件</div></td></tr>
+        <tr><td class="td-row-label">2025年12月</td><td>400</td><td>6</td><td>1.5%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:42px;"></span>6件</div></td></tr>
+        <tr><td class="td-row-label">2026年1月</td><td>400</td><td>8</td><td>2.0%</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span class="bar" style="width:56px;"></span>8件</div></td></tr>
+        <tr><td class="td-row-label">2026年2月</td><td>400</td><td>3</td><td>0.75%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:21px;"></span>3件</div></td></tr>
+        <tr><td class="td-row-label">2026年3月</td><td>400</td><td>13</td><td>3.25%</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span class="bar" style="width:91px;"></span>13件</div></td></tr>
+        <tr><td class="td-row-label">2026年4月</td><td>400</td><td>9</td><td>2.25%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:63px;"></span>9件</div></td></tr>
+        <tr><td class="td-row-label">2026年5月</td><td>400</td><td>10</td><td>2.5%</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span class="bar" style="width:70px;"></span>10件</div></td></tr>
+        <tr><td class="td-row-label">2026年6月</td><td>400</td><td>6</td><td>1.5%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:42px;"></span>6件</div></td></tr>
         <tr>
           <td class="td-row-label td-accent">2026年7月（途中）</td>
-          <td class="td-accent">200</td>
-          <td class="td-accent">4</td>
-          <td class="td-accent">2.0%</td>
-          <td style="text-align:left; padding-left:8px;" class="td-accent">
-            <div class="bar-wrap"><span class="bar highlight" style="width:28px;"></span><strong>4件</strong></div>
-          </td>
+          <td class="td-accent">200</td><td class="td-accent">4</td><td class="td-accent">2.0%</td>
+          <td style="text-align:left; padding-left:8px;" class="td-accent"><div class="bar-wrap"><span class="bar highlight" style="width:28px;"></span><strong>4件</strong></div></td>
         </tr>
       </tbody>
     </table>
     <p class="caption">※ 承諾数はプラットフォーム上の承諾ステータスより月次集計 ／ 累計承諾83名（オファー承諾済み68名＋説明会以降移行15名）</p>
 
-    <!-- OpenWork 月次 -->
     <div class="sub-title">OpenWork 応募月次推移（27卒）</div>
     <table>
       <thead>
         <tr>
-          <th style="width:160px;">月度</th>
-          <th>スカウト送信数</th>
-          <th>応募数</th>
-          <th>応募率</th>
-          <th>推移イメージ</th>
+          <th style="width:160px;">月度</th><th>スカウト送信数</th><th>応募数</th><th>応募率</th><th>推移イメージ</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="td-row-label">2025年12月</td>
-          <td>252</td><td>1</td><td>0.4%</td>
-          <td style="text-align:left; padding-left:8px; background:#fff;">
-            <div class="bar-wrap"><span class="bar" style="width:10px;"></span>1件</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2026年1月</td>
-          <td>104</td><td>5</td><td>4.8%</td>
-          <td style="text-align:left; padding-left:8px; background:#EEF6FB;">
-            <div class="bar-wrap"><span class="bar" style="width:50px;"></span>5件</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2026年2月</td>
-          <td>1</td><td>7</td><td>ー</td>
-          <td style="text-align:left; padding-left:8px; background:#fff;">
-            <div class="bar-wrap"><span class="bar" style="width:70px;"></span>7件（自己応募中心）</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2026年3月</td>
-          <td>0</td><td>2</td><td>ー</td>
-          <td style="text-align:left; padding-left:8px; background:#EEF6FB;">
-            <div class="bar-wrap"><span class="bar" style="width:20px;"></span>2件（自己応募）</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2026年4月</td>
-          <td>2,168</td><td>6</td><td>0.3%</td>
-          <td style="text-align:left; padding-left:8px; background:#fff;">
-            <div class="bar-wrap"><span class="bar" style="width:60px;"></span>6件</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2026年5月</td>
-          <td>200</td><td>3</td><td>1.5%</td>
-          <td style="text-align:left; padding-left:8px; background:#EEF6FB;">
-            <div class="bar-wrap"><span class="bar" style="width:30px;"></span>3件</div>
-          </td>
-        </tr>
-        <tr>
-          <td class="td-row-label">2026年6月</td>
-          <td>0</td><td>4</td><td>ー</td>
-          <td style="text-align:left; padding-left:8px; background:#fff;">
-            <div class="bar-wrap"><span class="bar" style="width:40px;"></span>4件（自己応募）</div>
-          </td>
-        </tr>
+        <tr><td class="td-row-label">2025年12月</td><td>252</td><td>1</td><td>0.4%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:10px;"></span>1件</div></td></tr>
+        <tr><td class="td-row-label">2026年1月</td><td>104</td><td>5</td><td>4.8%</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span class="bar" style="width:50px;"></span>5件</div></td></tr>
+        <tr><td class="td-row-label">2026年2月</td><td>1</td><td>7</td><td>ー</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:70px;"></span>7件（自己応募中心）</div></td></tr>
+        <tr><td class="td-row-label">2026年3月</td><td>0</td><td>2</td><td>ー</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span class="bar" style="width:20px;"></span>2件（自己応募）</div></td></tr>
+        <tr><td class="td-row-label">2026年4月</td><td>2,168</td><td>6</td><td>0.3%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:60px;"></span>6件</div></td></tr>
+        <tr><td class="td-row-label">2026年5月</td><td>200</td><td>3</td><td>1.5%</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span class="bar" style="width:30px;"></span>3件</div></td></tr>
+        <tr><td class="td-row-label">2026年6月</td><td>0</td><td>4</td><td>ー</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:40px;"></span>4件（自己応募）</div></td></tr>
         <tr>
           <td class="td-row-label td-accent">2026年7月（途中）</td>
-          <td class="td-accent">0</td>
-          <td class="td-accent">3</td>
-          <td class="td-accent">ー</td>
-          <td style="text-align:left; padding-left:8px;" class="td-accent">
-            <div class="bar-wrap"><span class="bar highlight" style="width:30px;"></span><strong>3件</strong>（自己応募）</div>
-          </td>
+          <td class="td-accent">0</td><td class="td-accent">3</td><td class="td-accent">ー</td>
+          <td style="text-align:left; padding-left:8px;" class="td-accent"><div class="bar-wrap"><span class="bar highlight" style="width:30px;"></span><strong>3件</strong>（自己応募）</div></td>
         </tr>
       </tbody>
     </table>
     <p class="caption">※ 応募数にはスカウト承諾＋自己応募が含まれる。6・7月はスカウト送信ゼロで企業ページ経由の自己応募が主。</p>
 
-    <!-- ABABA KPI Funnel -->
     <div class="sub-title">ABABA 選考ファネル KPI（27卒 累計）</div>
     <div class="kpi-row">
-      <div class="kpi-card">
-        <div class="kpi-lbl">スカウト送信</div>
-        <div class="kpi-val">3,954</div>
-        <div class="kpi-rate">累計</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-lbl">スカウト承諾</div>
-        <div class="kpi-val">53</div>
-        <div class="kpi-rate">承諾率 1.3%</div>
-      </div>
-      <div class="kpi-card orange">
-        <div class="kpi-lbl">カジュアル面接</div>
-        <div class="kpi-val">13</div>
-        <div class="kpi-rate">転換率 24.5%</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-lbl">最終面接</div>
-        <div class="kpi-val">6</div>
-        <div class="kpi-rate">転換率 46.2%</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-lbl">内定</div>
-        <div class="kpi-val">3</div>
-        <div class="kpi-rate">内定率 50.0%</div>
-      </div>
+      <div class="kpi-card"><div class="kpi-lbl">スカウト送信</div><div class="kpi-val">3,954</div><div class="kpi-rate">累計</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">スカウト承諾</div><div class="kpi-val">53</div><div class="kpi-rate">承諾率 1.3%</div></div>
+      <div class="kpi-card orange"><div class="kpi-lbl">カジュアル面接</div><div class="kpi-val">13</div><div class="kpi-rate">転換率 24.5%</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">最終面接</div><div class="kpi-val">6</div><div class="kpi-rate">転換率 46.2%</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">内定</div><div class="kpi-val">3</div><div class="kpi-rate">内定率 50.0%</div></div>
     </div>
 
-    <!-- キャリアチケット KPI Funnel -->
     <div class="sub-title">キャリアチケット 選考ファネル KPI（27卒 累計）</div>
     <div class="kpi-row">
-      <div class="kpi-card">
-        <div class="kpi-lbl">スカウト送信</div>
-        <div class="kpi-val">400<span style="font-size:14px;">/月</span></div>
-        <div class="kpi-rate">月次送信数</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-lbl">スカウト承諾</div>
-        <div class="kpi-val">83</div>
-        <div class="kpi-rate">累計</div>
-      </div>
-      <div class="kpi-card orange">
-        <div class="kpi-lbl">カジュアル面接</div>
-        <div class="kpi-val">18</div>
-        <div class="kpi-rate">転換率 21.7%</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-lbl">最終面接</div>
-        <div class="kpi-val">5</div>
-        <div class="kpi-rate">転換率 27.8%</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-lbl">内定 / 承諾</div>
-        <div class="kpi-val">2 / <span style="font-size:20px;">1</span></div>
-        <div class="kpi-rate">内定率 40.0% / 承諾率 50.0%</div>
-      </div>
+      <div class="kpi-card"><div class="kpi-lbl">スカウト送信</div><div class="kpi-val">400<span style="font-size:14px;">/月</span></div><div class="kpi-rate">月次送信数</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">スカウト承諾</div><div class="kpi-val">83</div><div class="kpi-rate">累計</div></div>
+      <div class="kpi-card orange"><div class="kpi-lbl">カジュアル面接</div><div class="kpi-val">18</div><div class="kpi-rate">転換率 21.7%</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">最終面接</div><div class="kpi-val">5</div><div class="kpi-rate">転換率 27.8%</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">内定 / 承諾</div><div class="kpi-val">2 / <span style="font-size:20px;">1</span></div><div class="kpi-rate">内定率 40.0% / 承諾率 50.0%</div></div>
     </div>
 
-    <!-- OpenWork KPI Funnel -->
     <div class="sub-title">OpenWork 選考ファネル KPI（27卒 累計）</div>
     <div class="kpi-row">
-      <div class="kpi-card">
-        <div class="kpi-lbl">応募（自己応募含む）</div>
-        <div class="kpi-val">34</div>
-        <div class="kpi-rate">累計</div>
-      </div>
-      <div class="kpi-card orange">
-        <div class="kpi-lbl">カジュアル面接</div>
-        <div class="kpi-val">4</div>
-        <div class="kpi-rate">転換率 11.8%</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-lbl">最終面接</div>
-        <div class="kpi-val">3</div>
-        <div class="kpi-rate">転換率 75.0%</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-lbl">内定</div>
-        <div class="kpi-val">2</div>
-        <div class="kpi-rate">内定率 66.7%</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-lbl">承諾</div>
-        <div class="kpi-val">0</div>
-        <div class="kpi-rate">承諾率 0%</div>
-      </div>
+      <div class="kpi-card"><div class="kpi-lbl">応募（自己応募含む）</div><div class="kpi-val">34</div><div class="kpi-rate">累計</div></div>
+      <div class="kpi-card orange"><div class="kpi-lbl">カジュアル面接</div><div class="kpi-val">4</div><div class="kpi-rate">転換率 11.8%</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">最終面接</div><div class="kpi-val">3</div><div class="kpi-rate">転換率 75.0%</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">内定</div><div class="kpi-val">2</div><div class="kpi-rate">内定率 66.7%</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">承諾</div><div class="kpi-val">0</div><div class="kpi-rate">承諾率 0%</div></div>
     </div>
 
-    <!-- 全媒体 KPI -->
     <div class="sub-title">全媒体 選考ファネル KPI（27卒 累計）</div>
     <div class="kpi-row">
-      <div class="kpi-card">
-        <div class="kpi-lbl">応募（承諾）</div>
-        <div class="kpi-val">170</div>
-        <div class="kpi-rate">3媒体合計</div>
-      </div>
-      <div class="kpi-card orange">
-        <div class="kpi-lbl">カジュアル面接</div>
-        <div class="kpi-val">35</div>
-        <div class="kpi-rate">転換率 20.6%</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-lbl">最終選考</div>
-        <div class="kpi-val">14</div>
-        <div class="kpi-rate">転換率 40.0%</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-lbl">内定</div>
-        <div class="kpi-val">7</div>
-        <div class="kpi-rate">転換率 50.0%</div>
-      </div>
-      <div class="kpi-card orange">
-        <div class="kpi-lbl">承諾</div>
-        <div class="kpi-val">1</div>
-        <div class="kpi-rate">承諾率 14.3%</div>
-      </div>
+      <div class="kpi-card"><div class="kpi-lbl">応募（承諾）</div><div class="kpi-val">170</div><div class="kpi-rate">3媒体合計</div></div>
+      <div class="kpi-card orange"><div class="kpi-lbl">カジュアル面接</div><div class="kpi-val">35</div><div class="kpi-rate">転換率 20.6%</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">最終選考</div><div class="kpi-val">14</div><div class="kpi-rate">転換率 40.0%</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">内定</div><div class="kpi-val">7</div><div class="kpi-rate">転換率 50.0%</div></div>
+      <div class="kpi-card orange"><div class="kpi-lbl">承諾</div><div class="kpi-val">1</div><div class="kpi-rate">承諾率 14.3%</div></div>
     </div>
   </div>
 
-  <!-- Closing -->
   <div class="closing">
-    <p style="font-size:15px; font-weight:600; color:#fff; margin-bottom:8px;">
-      本レポートは毎月1回更新予定です
-    </p>
+    <p style="font-size:15px; font-weight:600; color:#fff; margin-bottom:8px;">本レポートは毎月1回更新予定です</p>
     <p>ご質問・データ更新のご連絡は担当CAまでお気軽にどうぞ。</p>
-    <p style="margin-top:4px;">株式会社WorCry&ensp;|&ensp;担当：鈴木 脩平&ensp;|&ensp; ssuzuki@worcry.com</p>
+    <p style="margin-top:4px;">株式会社WorCry&ensp;|&ensp;担当：鈴木 脩平&ensp;|&ensp;ssuzuki@worcry.com</p>
   </div>
 
-</div><!-- /report -->
+</div>
+</div><!-- /tab-jul -->
+
+<!-- ████ 6月度 ████ -->
+<div class="tab-content" id="tab-jun">
+<div class="report">
+
+  <div class="update-row">📅 データ基準日：2026年6月30日（火）</div>
+
+  <!-- Section 1 -->
+  <div class="section">
+    <div class="section-title">1）選考進捗サマリー</div>
+
+    <div class="sub-title">1-1）27卒 選考進捗サマリー（累計・6月末）</div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:72px;"></th>
+          <th>応募</th><th>カジュアル面接</th><th>最終選考</th><th>内定</th><th>承諾</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-row-label">実績</td>
+          <td>159</td><td>34</td><td>13</td><td>6</td><td class="td-accent">1</td>
+        </tr>
+        <tr>
+          <td class="td-row-label" style="font-size:12px;">ステップ率</td>
+          <td style="color:var(--text-muted); font-size:12px;">ー</td>
+          <td style="font-size:12px;">21.4%</td>
+          <td style="font-size:12px;">38.2%</td>
+          <td style="font-size:12px;">46.2%</td>
+          <td style="font-size:12px; background:var(--orange-light)!important;">16.7%</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="caption">※ 応募＝スカウト承諾（ABABA・キャリアチケット）＋自己応募（OpenWork）の合計　／　ステップ率＝前ステップからの転換率</p>
+
+    <div class="sub-title" style="margin-top:28px;">1-2）月次 KPI 目標</div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:180px;">KPI項目</th><th>月次目標（件数）</th><th>目標転換率</th><th>ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-media-label">スカウト承諾</td><td>10件</td><td>0.50%</td>
+          <td style="color:var(--text-muted); font-size:12px;">承諾率 目標値</td>
+        </tr>
+        <tr>
+          <td class="td-media-label-even" style="background:var(--orange-light)!important; font-weight:700;">カジュアル面接</td>
+          <td style="background:var(--orange-light)!important; font-weight:700;">6件</td>
+          <td style="background:var(--orange-light)!important; font-weight:700;">50.00%</td>
+          <td style="background:var(--orange-light)!important; font-size:12px; color:var(--orange-dark);">⚠️ 現状ボトルネック</td>
+        </tr>
+        <tr>
+          <td class="td-media-label">最終面接</td><td>3件</td><td>30.00%</td>
+          <td style="color:var(--text-muted); font-size:12px;">転換率 目標値</td>
+        </tr>
+        <tr>
+          <td class="td-media-label-even">内定</td><td>2件</td><td>33.33%</td>
+          <td style="color:var(--text-muted); font-size:12px;">転換率 目標値</td>
+        </tr>
+        <tr>
+          <td class="td-media-label">承諾</td><td>1件</td><td>ー</td>
+          <td style="color:var(--text-muted); font-size:12px;">最終目標</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="caption">※ 月次目標は各ステップの目標件数および前ステップからの転換率目標を示す</p>
+
+    <div class="sub-title" style="margin-top:28px;">6月度 単月実績（27卒・6/1〜6/30）</div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:160px;">媒体</th><th>承諾（応募）</th><th>承諾率</th><th>C面接</th><th>内定</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-row-label">ABABA</td>
+          <td>18</td><td>1.4%</td><td class="td-pending">ー</td><td>2</td>
+        </tr>
+        <tr>
+          <td class="td-row-label">キャリアチケット</td>
+          <td>6</td><td>1.5%</td><td class="td-pending">ー</td><td>0</td>
+        </tr>
+        <tr>
+          <td class="td-row-label">OpenWork（27卒）</td>
+          <td>4</td><td>ー</td><td class="td-pending">ー</td><td>1</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="caption">※ ABABA内定2名は西村（辞退）・齋藤 ／ OW内定1名は小田垣 ／ CT内定は6月なし（伊藤6/26最終→不合格）</p>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="section">
+    <div class="section-title">2）媒体別 選考状況</div>
+    <div class="sub-title">27卒 媒体別選考状況（累計・6月末時点）</div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:175px;">媒体</th><th>応募</th><th>カジュアル面接</th><th>最終選考</th><th>内定</th><th>承諾</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-media-label">ABABA</td>
+          <td>49</td><td>13</td><td>5</td><td>2</td><td>0</td>
+        </tr>
+        <tr>
+          <td class="td-media-label-even">キャリアチケット</td>
+          <td>79</td><td>18</td><td>5</td><td>2</td><td>1</td>
+        </tr>
+        <tr>
+          <td class="td-media-label">OpenWork（27卒）</td>
+          <td>31</td><td>3</td><td>3</td><td>2</td><td>0</td>
+        </tr>
+        <tr>
+          <td class="td-total">合計</td>
+          <td class="td-total">159</td><td class="td-total">34</td><td class="td-total">13</td>
+          <td class="td-total">6</td><td class="td-total td-accent">1</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="caption">
+      ※ 応募＝スカウト承諾（ABABA・CT）＋自己応募（OW）。CT・OWはスプレッドシート実績値を使用<br>
+      ※ カジュアル面接＝各媒体の初回面接 ／ 最終選考＝最終面接ステップ ／ 内定6名のうちABABA 1名・CT 1名・OW 1名 計3名は辞退
+    </p>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="section">
+    <div class="section-title">3）月次推移・選考ステップ率</div>
+
+    <div class="sub-title">ABABA スカウト月次推移（27卒）</div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:160px;">月度</th><th>スカウト送信数</th><th>承諾数</th><th>承諾率</th><th>推移イメージ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-row-label">2025年10月</td><td>16</td><td>0</td><td>0%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span style="color:var(--text-muted); font-size:12px;">ー</span></div></td></tr>
+        <tr><td class="td-row-label">2025年11月</td><td>28</td><td>0</td><td>0%</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span style="color:var(--text-muted); font-size:12px;">ー</span></div></td></tr>
+        <tr><td class="td-row-label">2026年1月</td><td>406</td><td>4</td><td>1.0%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:20px;"></span>4件</div></td></tr>
+        <tr><td class="td-row-label">2026年2月</td><td>249</td><td>3</td><td>1.2%</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span class="bar" style="width:15px;"></span>3件</div></td></tr>
+        <tr><td class="td-row-label">2026年3月</td><td>295</td><td>5</td><td>1.7%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:25px;"></span>5件</div></td></tr>
+        <tr><td class="td-row-label">2026年4月</td><td>316</td><td>6</td><td>1.9%</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span class="bar" style="width:30px;"></span>6件</div></td></tr>
+        <tr><td class="td-row-label">2026年5月</td><td>822</td><td>12</td><td>1.5%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:60px;"></span>12件</div></td></tr>
+        <tr>
+          <td class="td-row-label td-accent">2026年6月</td>
+          <td class="td-accent">1,315</td><td class="td-accent">18</td><td class="td-accent">1.4%</td>
+          <td style="text-align:left; padding-left:8px;" class="td-accent"><div class="bar-wrap"><span class="bar highlight" style="width:90px;"></span><strong>18件</strong></div></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="caption">※ 2025年12月はABABAプラットフォーム上のデータなし（スカウト送信ゼロのため非表示） ／ 6月末累計送信3,604通・承諾49名（承諾率1.4%）</p>
+
+    <div class="sub-title">キャリアチケット スカウト月次推移（27卒）</div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:160px;">月度</th><th>スカウト送信数</th><th>承諾数</th><th>承諾率</th><th>推移イメージ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-row-label">2025年10月</td><td>400</td><td>14</td><td>3.5%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:98px;"></span>14件</div></td></tr>
+        <tr><td class="td-row-label">2025年11月</td><td>400</td><td>4</td><td>1.0%</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span class="bar" style="width:28px;"></span>4件</div></td></tr>
+        <tr><td class="td-row-label">2025年12月</td><td>400</td><td>6</td><td>1.5%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:42px;"></span>6件</div></td></tr>
+        <tr><td class="td-row-label">2026年1月</td><td>400</td><td>8</td><td>2.0%</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span class="bar" style="width:56px;"></span>8件</div></td></tr>
+        <tr><td class="td-row-label">2026年2月</td><td>400</td><td>3</td><td>0.75%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:21px;"></span>3件</div></td></tr>
+        <tr><td class="td-row-label">2026年3月</td><td>400</td><td>13</td><td>3.25%</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span class="bar" style="width:91px;"></span>13件</div></td></tr>
+        <tr><td class="td-row-label">2026年4月</td><td>400</td><td>9</td><td>2.25%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:63px;"></span>9件</div></td></tr>
+        <tr><td class="td-row-label">2026年5月</td><td>400</td><td>10</td><td>2.5%</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span class="bar" style="width:70px;"></span>10件</div></td></tr>
+        <tr>
+          <td class="td-row-label td-accent">2026年6月</td>
+          <td class="td-accent">400</td><td class="td-accent">6</td><td class="td-accent">1.5%</td>
+          <td style="text-align:left; padding-left:8px;" class="td-accent"><div class="bar-wrap"><span class="bar highlight" style="width:42px;"></span><strong>6件</strong></div></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="caption">※ 承諾数はプラットフォーム上の承諾ステータスより月次集計 ／ 6月末累計承諾79名</p>
+
+    <div class="sub-title">OpenWork 応募月次推移（27卒）</div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:160px;">月度</th><th>スカウト送信数</th><th>応募数</th><th>応募率</th><th>推移イメージ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-row-label">2025年12月</td><td>252</td><td>1</td><td>0.4%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:10px;"></span>1件</div></td></tr>
+        <tr><td class="td-row-label">2026年1月</td><td>104</td><td>5</td><td>4.8%</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span class="bar" style="width:50px;"></span>5件</div></td></tr>
+        <tr><td class="td-row-label">2026年2月</td><td>1</td><td>7</td><td>ー</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:70px;"></span>7件（自己応募中心）</div></td></tr>
+        <tr><td class="td-row-label">2026年3月</td><td>0</td><td>2</td><td>ー</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span class="bar" style="width:20px;"></span>2件（自己応募）</div></td></tr>
+        <tr><td class="td-row-label">2026年4月</td><td>2,168</td><td>6</td><td>0.3%</td><td style="text-align:left; padding-left:8px; background:#fff;"><div class="bar-wrap"><span class="bar" style="width:60px;"></span>6件</div></td></tr>
+        <tr><td class="td-row-label">2026年5月</td><td>200</td><td>3</td><td>1.5%</td><td style="text-align:left; padding-left:8px; background:#EEF6FB;"><div class="bar-wrap"><span class="bar" style="width:30px;"></span>3件</div></td></tr>
+        <tr>
+          <td class="td-row-label td-accent">2026年6月</td>
+          <td class="td-accent">0</td><td class="td-accent">4</td><td class="td-accent">ー</td>
+          <td style="text-align:left; padding-left:8px;" class="td-accent"><div class="bar-wrap"><span class="bar highlight" style="width:40px;"></span><strong>4件</strong>（自己応募）</div></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="caption">※ 応募数にはスカウト承諾＋自己応募が含まれる。6月はスカウト送信ゼロで企業ページ経由の自己応募が主。</p>
+
+    <div class="sub-title">ABABA 選考ファネル KPI（27卒 6月末累計）</div>
+    <div class="kpi-row">
+      <div class="kpi-card"><div class="kpi-lbl">スカウト送信</div><div class="kpi-val">3,604</div><div class="kpi-rate">6月末累計</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">スカウト承諾</div><div class="kpi-val">49</div><div class="kpi-rate">承諾率 1.4%</div></div>
+      <div class="kpi-card orange"><div class="kpi-lbl">カジュアル面接</div><div class="kpi-val">13</div><div class="kpi-rate">転換率 26.5%</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">最終面接</div><div class="kpi-val">5</div><div class="kpi-rate">転換率 38.5%</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">内定</div><div class="kpi-val">2</div><div class="kpi-rate">内定率 40.0%</div></div>
+    </div>
+
+    <div class="sub-title">キャリアチケット 選考ファネル KPI（27卒 6月末累計）</div>
+    <div class="kpi-row">
+      <div class="kpi-card"><div class="kpi-lbl">スカウト送信</div><div class="kpi-val">400<span style="font-size:14px;">/月</span></div><div class="kpi-rate">月次送信数</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">スカウト承諾</div><div class="kpi-val">79</div><div class="kpi-rate">6月末累計</div></div>
+      <div class="kpi-card orange"><div class="kpi-lbl">カジュアル面接</div><div class="kpi-val">18</div><div class="kpi-rate">転換率 22.8%</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">最終面接</div><div class="kpi-val">5</div><div class="kpi-rate">転換率 27.8%</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">内定 / 承諾</div><div class="kpi-val">2 / <span style="font-size:20px;">1</span></div><div class="kpi-rate">内定率 40.0% / 承諾率 50.0%</div></div>
+    </div>
+
+    <div class="sub-title">OpenWork 選考ファネル KPI（27卒 6月末累計）</div>
+    <div class="kpi-row">
+      <div class="kpi-card"><div class="kpi-lbl">応募（自己応募含む）</div><div class="kpi-val">31</div><div class="kpi-rate">6月末累計</div></div>
+      <div class="kpi-card orange"><div class="kpi-lbl">カジュアル面接</div><div class="kpi-val">3</div><div class="kpi-rate">転換率 9.7%</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">最終面接</div><div class="kpi-val">3</div><div class="kpi-rate">転換率 100%</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">内定</div><div class="kpi-val">2</div><div class="kpi-rate">内定率 66.7%</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">承諾</div><div class="kpi-val">0</div><div class="kpi-rate">承諾率 0%</div></div>
+    </div>
+
+    <div class="sub-title">全媒体 選考ファネル KPI（27卒 6月末累計）</div>
+    <div class="kpi-row">
+      <div class="kpi-card"><div class="kpi-lbl">応募（承諾）</div><div class="kpi-val">159</div><div class="kpi-rate">3媒体合計</div></div>
+      <div class="kpi-card orange"><div class="kpi-lbl">カジュアル面接</div><div class="kpi-val">34</div><div class="kpi-rate">転換率 21.4%</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">最終選考</div><div class="kpi-val">13</div><div class="kpi-rate">転換率 38.2%</div></div>
+      <div class="kpi-card"><div class="kpi-lbl">内定</div><div class="kpi-val">6</div><div class="kpi-rate">転換率 46.2%</div></div>
+      <div class="kpi-card orange"><div class="kpi-lbl">承諾</div><div class="kpi-val">1</div><div class="kpi-rate">承諾率 16.7%</div></div>
+    </div>
+  </div>
+
+  <div class="closing">
+    <p style="font-size:15px; font-weight:600; color:#fff; margin-bottom:8px;">本レポートは毎月1回更新予定です</p>
+    <p>ご質問・データ更新のご連絡は担当CAまでお気軽にどうぞ。</p>
+    <p style="margin-top:4px;">株式会社WorCry&ensp;|&ensp;担当：鈴木 脩平&ensp;|&ensp;ssuzuki@worcry.com</p>
+  </div>
+
+</div>
+</div><!-- /tab-jun -->
+
+<script>
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(function(btn) { btn.classList.remove('active'); });
+  document.querySelectorAll('.tab-content').forEach(function(el) { el.classList.remove('active'); });
+  document.querySelector('[data-tab="' + tab + '"]').classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
+
 </body>
 </html>
