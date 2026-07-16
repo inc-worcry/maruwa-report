@@ -19,17 +19,14 @@
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:'Hiragino Sans','Yu Gothic',Meiryo,sans-serif; background:var(--bg); color:var(--text); font-size:14px; line-height:1.6; }
 
-    /* Header */
     .header { background:var(--navy); color:#fff; padding:28px 40px; }
     .header h1 { font-size:22px; font-weight:800; margin-bottom:4px; }
     .header .sub { font-size:13px; color:rgba(255,255,255,.65); }
     .header .meta { margin-top:4px; font-size:12px; color:rgba(255,255,255,.45); }
 
-    /* Page */
     .page { max-width:900px; margin:0 auto; padding:32px 24px 60px; }
 
-    /* Section */
-    .section { margin-bottom:36px; }
+    .section { margin-bottom:40px; }
     .section-title {
       font-size:17px; font-weight:800; color:var(--text);
       border-bottom:3px solid var(--orange);
@@ -67,6 +64,20 @@
     .b-mid { background:#FFF3E0; color:#8B5E00; }
     .kpi .warn td { background:#FFF8F0!important; border-top:2px solid var(--orange)!important; border-bottom:2px solid var(--orange)!important; }
 
+    /* Byname row */
+    .byname-row td {
+      background:#F8F8F8!important;
+      border:1px solid #E0E0E0!important;
+      padding:7px 14px!important;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .byname-label {
+      font-size:11px; font-weight:700; color:var(--navy);
+      background:#E8EFF8; display:inline-block;
+      padding:1px 7px; border-radius:3px; margin-right:6px;
+    }
+
     /* Simple Table */
     .tbl { width:100%; border-collapse:collapse; font-size:13px; }
     .tbl th { background:var(--navy); color:#fff; padding:8px 11px; text-align:center; font-size:12px; }
@@ -85,10 +96,8 @@
     .fn.warn .fn-rate { color:var(--red); }
     .fn-arr { font-size:18px; color:#bbb; padding:0 4px; flex-shrink:0; }
 
-    /* Note */
     .note { font-size:12px; color:var(--muted); margin-top:8px; line-height:1.6; }
 
-    /* Footer */
     .footer { background:var(--navy); color:rgba(255,255,255,.5); text-align:center; font-size:12px; padding:18px; margin-top:20px; }
   </style>
 </head>
@@ -152,6 +161,12 @@
           </td>
           <td class="center"><span class="badge b-ok">✅ 達成 167%</span></td>
         </tr>
+        <tr class="byname-row">
+          <td colspan="5">
+            <span class="byname-label">バイネーム</span>
+            西村奏汰（ABABA・辞退）｜小田垣光陽（OW）｜齋藤洋平（ABABA）｜村瀬 瑞（ABABA・不合格）｜伊藤利久（CT・不合格）
+          </td>
+        </tr>
         <tr>
           <td class="step">内定</td>
           <td class="num dim">2件</td>
@@ -164,6 +179,12 @@
           </td>
           <td class="center"><span class="badge b-ok">✅ 達成 150%</span></td>
         </tr>
+        <tr class="byname-row">
+          <td colspan="5">
+            <span class="byname-label">バイネーム</span>
+            西村奏汰（ABABA・辞退）｜小田垣光陽（OW）｜齋藤洋平（ABABA）
+          </td>
+        </tr>
         <tr>
           <td class="step">承諾</td>
           <td class="num dim">1件</td>
@@ -171,14 +192,20 @@
           <td class="rate"><span class="na">ー</span></td>
           <td class="center"><span class="badge b-ng">⚠ 未達</span></td>
         </tr>
+        <tr class="byname-row">
+          <td colspan="5">
+            <span class="byname-label">バイネーム</span>
+            ー
+          </td>
+        </tr>
       </tbody>
     </table>
     <p class="note">
       ※ 転換率＝前ステップからの通過率（6月単月）。<br>
-      ※ 応募28件→C面接6件（転換率21.4%）が継続ボトルネック。最終以降は高歩留まり。内定3件（ABABA西村辞退・齋藤洋平、OW小田垣）。
+      ※ 応募28件→C面接6件（転換率21.4%）が継続ボトルネック。最終・内定は高歩留まり。
     </p>
 
-    <div style="margin-top:14px;">
+    <div style="margin-top:16px;">
       <strong style="font-size:13px; display:block; margin-bottom:8px;">媒体別内訳（6月単月）</strong>
       <table class="tbl">
         <thead><tr><th style="width:160px; text-align:left;">媒体</th><th>応募</th><th>C面接</th><th>最終</th><th>内定</th></tr></thead>
@@ -218,11 +245,11 @@
         <tr class="warn">
           <td class="step">⚠️ C面接</td>
           <td class="num dim">6件</td>
-          <td class="num" style="font-size:14px; color:var(--muted);">集計中</td>
+          <td class="num">2件</td>
           <td class="rate">
             <div class="r-wrap">
               <span class="r-tgt">目標 50%</span>
-              <span class="r-act ng">〜9%</span>
+              <span class="r-act ng">18.2%</span>
             </div>
           </td>
           <td class="center"><span class="badge b-mid">📋 途中</span></td>
@@ -234,12 +261,24 @@
           <td class="rate"><span class="na">ー</span></td>
           <td class="center"><span class="badge b-ng">⚠ 未達</span></td>
         </tr>
+        <tr class="byname-row">
+          <td colspan="5">
+            <span class="byname-label">バイネーム</span>
+            岡田さくら（ABABA・7/9 → 内定）
+          </td>
+        </tr>
         <tr>
           <td class="step">内定</td>
           <td class="num dim">2件</td>
           <td class="num">1件</td>
           <td class="rate"><span class="na">ー</span></td>
           <td class="center"><span class="badge b-ng">⚠ 未達</span></td>
+        </tr>
+        <tr class="byname-row">
+          <td colspan="5">
+            <span class="byname-label">バイネーム</span>
+            岡田さくら（ABABA）
+          </td>
         </tr>
         <tr>
           <td class="step">承諾</td>
@@ -248,22 +287,28 @@
           <td class="rate"><span class="na">ー</span></td>
           <td class="center"><span class="badge b-ng">⚠ 未達</span></td>
         </tr>
+        <tr class="byname-row">
+          <td colspan="5">
+            <span class="byname-label">バイネーム</span>
+            ー
+          </td>
+        </tr>
       </tbody>
     </table>
     <p class="note">
-      ※ C面接「〜9%」は7/16暫定値（応募11件中1件確認済）。月末に向けて継続中。<br>
-      ※ 内定1件＝ABABA（岡田さん）。
+      ※ C面接は実施ベース（7/7 大森智貴・ABABA、7/9 近藤安樹・OW 通過）。<br>
+      ※ 内定後の近況：岡田さくら（ABABA）承諾待ち。C面接通過者：近藤安樹（OW）最終日程調整中。
     </p>
 
-    <div style="margin-top:14px;">
+    <div style="margin-top:16px;">
       <strong style="font-size:13px; display:block; margin-bottom:8px;">媒体別内訳（7月単月）</strong>
       <table class="tbl">
         <thead><tr><th style="width:160px; text-align:left;">媒体</th><th>応募</th><th>C面接</th><th>最終</th><th>内定</th></tr></thead>
         <tbody>
-          <tr><td class="L">ABABA</td><td>4</td><td>集計中</td><td>1</td><td>1</td></tr>
-          <tr><td class="L">キャリアチケット</td><td>4</td><td>集計中</td><td>0</td><td>0</td></tr>
-          <tr><td class="L">OpenWork</td><td>3</td><td>1+</td><td>0</td><td>0</td></tr>
-          <tr><td class="tot">合計</td><td class="tot">11</td><td class="tot">集計中</td><td class="tot">1</td><td class="tot">1</td></tr>
+          <tr><td class="L">ABABA</td><td>4</td><td>1<br><small style="color:var(--muted); font-weight:400;">大森智貴</small></td><td>1<br><small style="color:var(--muted); font-weight:400;">岡田さくら</small></td><td>1<br><small style="color:var(--muted); font-weight:400;">岡田さくら</small></td></tr>
+          <tr><td class="L">キャリアチケット</td><td>4</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td class="L">OpenWork</td><td>3</td><td>1<br><small style="color:var(--muted); font-weight:400;">近藤安樹（通過）</small></td><td>0</td><td>0</td></tr>
+          <tr><td class="tot">合計</td><td class="tot">11</td><td class="tot">2</td><td class="tot">1</td><td class="tot">1</td></tr>
         </tbody>
       </table>
     </div>
@@ -306,7 +351,10 @@
         <div class="fn-rate">転換率 14.3%</div>
       </div>
     </div>
-    <p class="note" style="margin-bottom:14px;">※ 内定7名のうち辞退3名（ABABA西村・CT興野・OW石川）。正味4名が継続中。</p>
+    <p class="note" style="margin-bottom:16px;">
+      ※ 内定7名のうち辞退3名（西村奏汰・ABABA、興野周太・CT、石川優奈・OW）。正味4名が継続中。<br>
+      ※ C面接転換率（20.6%）が累計を通じたボトルネック。最終以降の歩留まりは高水準。
+    </p>
 
     <strong style="font-size:13px; display:block; margin-bottom:8px;">媒体別 累計</strong>
     <table class="tbl">
